@@ -1,11 +1,13 @@
-# First Give Time to FetchAll Data
+# Basic Guidelines for the app
 
-# Use buttons to show or hide ships or ports
+### First Give Time to FetchAll Data
 
-# For ship route, search the ship in the search box
+### Use buttons to show or hide ships or ports
 
-# search ships based on the available ships that can be checked by clicking "Available Ships"
+### For ship route, search the ship in the search box
 
-# clicking on any ship gives its name, longitude and latitude
+### search ships based on the available ships that can be checked by clicking "Available Ships"
 
-# clicking on any port opens a panel on the right side that has information about the port and all the ships visited to this port.
+### clicking on any ship gives its name, longitude and latitude
+
+### clicking on any port opens a panel on the right side that has information about the port and all the ships visited to this port.
