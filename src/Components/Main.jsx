@@ -1,25 +1,33 @@
-import React from 'react'
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
-
-const Map = ReactMapboxGl({
-    accessToken:
-      'pk.eyJ1IjoiaGFwcHlkaWxyYWoiLCJhIjoiY2w0bGJrZWw0MHJoejNpbnhhb2FwZDF2MyJ9.zJucH5aP_S4b-pk8Z6_exA'
-  });
+import React, { useState } from 'react'
+import MapComponent from './MapComponent'
+import BoatsData from './Data/BoatsData'
+import ReactLoading from 'react-loading';
+import PortsData from './Data/PortsData';
 
 const Main = () => {
+
+  
+    
+    const [boatsData, setBoatsData] = useState([])
+    const [boatsAllData, setBoatsAllData] = useState([])
+    const [portsData, setPortsData] = useState([])
+
+
   return (
-    <Map
-        style="mapbox://styles/mapbox/streets-v9"
-        containerStyle={{
-            height: '100vh',
-            width: '100vw'
-        }}
-        >
-        <Layer type="symbol" id="marker" layout={{ 'icon-image': 'marker-15' }}>
-            <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
-        </Layer>
-    </Map>
+    <>
+      { (boatsData.length===0 || portsData.length===0) &&
+      <div className="loader">
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <h2>Fetching Data</h2>
+        <ReactLoading type={"spokes"} color={"red"} height={'20%'} width={'20%'} />
+        </div>
+      </div>
+      
+      }
+      <BoatsData boatsData={boatsData} setBoatsData={setBoatsData} setBoatsAllData={setBoatsAllData}/> 
+      <PortsData portsData={portsData} setPortsData={setPortsData}/>
+      <MapComponent boatsData={boatsData} portsData={portsData} boatsAllData={boatsAllData}/>
+    </>
   )
 }
 
