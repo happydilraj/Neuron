@@ -3,7 +3,7 @@ import ReactSearchBox from "react-search-box";
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
-const SearchBoat = ({map, boatsData, boatsAllData, showShips, setShowShips, showPorts, setShowPorts}) => {
+const SearchBoat = ({map, boatsData, boatsAllData, showShips, setShowShips, showPorts, setShowPorts, portsData}) => {
 
     const [value, setValue] = useState("");
     const [isSidePanelOpen, setIsSidePanelOpen] = useState(false)
@@ -142,7 +142,7 @@ const SearchBoat = ({map, boatsData, boatsAllData, showShips, setShowShips, show
 
     useEffect(() => {
         FetchAllAvailableShips()
-    })
+    },[boatsAllData])
 
     const FetchAllAvailableShips = () => {
         const names = []
@@ -169,14 +169,14 @@ const SearchBoat = ({map, boatsData, boatsAllData, showShips, setShowShips, show
         <div className="search-container">
             <div className="form-check form-switch">
             <label className="form-check-label" htmlFor="flexSwitchCheckDefault"> Show ships </label>
-            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={() => setShowShips(!showShips)}/>
+            <input className="form-check-input" disabled={boatsData.length===0?true:false} type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={() => setShowShips(!showShips)}/>
             </div>
             <div className="form-check form-switch">
             <label className="form-check-label" htmlFor="flexSwitchCheckDefault"> Show Ports </label>
-            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={() => setShowPorts(!showPorts)}/>
+            <input className="form-check-input" disabled={portsData.length===0?true:false} type="checkbox" role="switch" id="flexSwitchCheckDefault" onChange={() => setShowPorts(!showPorts)}/>
         </div>
         <div>
-            <button onClick={() => setIsSidePanelOpen(!isSidePanelOpen)}> Available Ships </button>
+            <button disabled={boatsAllData.length===0?true:false} onClick={() => setIsSidePanelOpen(!isSidePanelOpen)}> Available Ships </button>
         </div>
             <ReactSearchBox
             placeholder="Search ship..."
